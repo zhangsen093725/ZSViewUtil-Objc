@@ -1,0 +1,16 @@
+PODS:
+  - ZSViewUtil-Objc (0.1.0)
+
+DEPENDENCIES:
+  - ZSViewUtil-Objc (from `../`)
+
+EXTERNAL SOURCES:
+  ZSViewUtil-Objc:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ZSViewUtil-Objc: 3d87cb7fdf751b30e902c47b73344f63a556b180
+
+PODFILE CHECKSUM: 638fe684b89c1a727e8c756cca6539059e3c62fd
+
+COCOAPODS: 1.9.3
