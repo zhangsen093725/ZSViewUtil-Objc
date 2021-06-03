@@ -83,30 +83,37 @@
         {
             frame.origin.x = CGRectGetMaxX(pre.frame) + self.minimumInteritemSpacing;
         }
-        /// UICollectionView 不可滑动时
-        else if (self.collectionView.isScrollEnabled == NO)
-        {
-            /// 超出可见区域部分不做处理
-            if (CGRectGetMaxY(obj.frame) + self.minimumLineSpacing > CGRectGetHeight(self.collectionView.frame))
-            {
-                /// 尾行最后一个 Item 不舍弃时，限定最后一个 Item 的宽度为可见区域最大宽度
-                if (self.isLineBreakByClipping == NO)
-                {
-                    frame.origin.y = CGRectGetMinY(pre.frame);
-                    frame.origin.x = CGRectGetMaxX(pre.frame) + self.minimumInteritemSpacing;
-                    frame.size.width = CGRectGetWidth(self.collectionView.frame) - CGRectGetMinX(frame) - self.sectionInset.right;
-                    
-                    obj.frame = frame;
-                    [subAttributes addObject:obj];
-                }
-                
-                *stop = YES;
-                return;
-            }
-        }
         /// 每行的第一个
         else
         {
+            /// UICollectionView 不可滑动时
+            if (self.collectionView.isScrollEnabled == NO)
+            {
+                /// 超出可见区域部分不做处理
+                if (CGRectGetMaxY(obj.frame) + self.minimumLineSpacing > CGRectGetHeight(self.collectionView.frame))
+                {
+                    /// 尾行最后一个 Item 不舍弃时，限定最后一个 Item 的宽度为可见区域最大宽度
+                    if (self.isLineBreakByClipping == NO)
+                    {
+                        CGFloat width = CGRectGetWidth(self.collectionView.frame) - CGRectGetMinX(frame) - self.sectionInset.right;
+                        
+                        /// 保障最小的宽度
+                        if (width > 20)
+                        {
+                            frame.origin.y = CGRectGetMinY(pre.frame);
+                            frame.origin.x = CGRectGetMaxX(pre.frame) + self.minimumInteritemSpacing;
+                            frame.size.width = width;
+                            
+                            obj.frame = frame;
+                            [subAttributes addObject:[obj copy]];
+                        }
+                    }
+                    
+                    *stop = YES;
+                    return;
+                }
+            }
+            
             frame.origin.x = self.sectionInset.left;
         }
         
@@ -125,22 +132,22 @@
             
             [subAttributes enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 
-                UICollectionViewLayoutAttributes *pre = idx > 0 ? attributes[idx - 1] : nil;
+                UICollectionViewLayoutAttributes *pre = idx > 0 ? subAttributes[idx - 1] : nil;
                 
                 /// 上一行的右对齐
                 if (CGRectGetMinY(pre.frame) != CGRectGetMinY(obj.frame) && pre != nil)
                 {
-                    NSArray *subArray = [self cellsAlignmentRightFromAttributes:attributes
+                    NSArray *subArray = [self cellsAlignmentRightFromAttributes:subAttributes
                                                                           range:NSMakeRange(preIndex, idx + 1 - preIndex)];
                     
                     preIndex = idx;
                     [tempArray addObjectsFromArray:subArray];
                 }
                 /// 最后一行的右对齐
-                else
+                else  if (idx == subAttributes.count - 1)
                 {
-                    NSArray *subArray = [self cellsAlignmentRightFromAttributes:attributes
-                                                                          range:NSMakeRange(preIndex, attributes.count - preIndex)];
+                    NSArray *subArray = [self cellsAlignmentRightFromAttributes:subAttributes
+                                                                          range:NSMakeRange(preIndex, subAttributes.count - preIndex)];
                     [tempArray addObjectsFromArray:subArray];
                 }
                 
@@ -154,14 +161,14 @@
             
             __block NSInteger preIndex = 0;
             
-            [attributes enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [subAttributes enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 
-                UICollectionViewLayoutAttributes *pre = idx > 0 ? attributes[idx - 1] : nil;
+                UICollectionViewLayoutAttributes *pre = idx > 0 ? subAttributes[idx - 1] : nil;
 
                 /// 上一行的居中布局
                 if (CGRectGetMinY(pre.frame) != CGRectGetMinY(obj.frame) && pre != nil)
                 {
-                    NSArray *subArray = [self cellsAlignmentCenterFromAttributes:attributes
+                    NSArray *subArray = [self cellsAlignmentCenterFromAttributes:subAttributes
                                                                         lastCell:pre
                                                                            range:NSMakeRange(preIndex, idx + 1 - preIndex)];
                     
@@ -169,11 +176,11 @@
                     [tempArray addObjectsFromArray:subArray];
                 }
                 /// 最后一行的居中布局
-                else if (idx == attributes.count - 1)
+                else if (idx == subAttributes.count - 1)
                 {
-                    NSArray *subArray = [self cellsAlignmentCenterFromAttributes:attributes
+                    NSArray *subArray = [self cellsAlignmentCenterFromAttributes:subAttributes
                                                                         lastCell:obj
-                                                                           range:NSMakeRange(preIndex, attributes.count - preIndex)];
+                                                                           range:NSMakeRange(preIndex, subAttributes.count - preIndex)];
                     [tempArray addObjectsFromArray:subArray];
                 }
             }];

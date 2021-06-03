@@ -24,19 +24,17 @@
     
     if (!_collectionView)
     {
-        ZSFixedSpecingFlowLayout *flowLayout = [[ZSFixedSpecingFlowLayout alloc] initWithAlignment:ZSFixedSpecingAlignmentCenter
-                                                                             isLineBreakByClipping:YES
+        ZSFixedSpecingFlowLayout *flowLayout = [[ZSFixedSpecingFlowLayout alloc] initWithAlignment:ZSFixedSpecingAlignmentRight
+                                                                             isLineBreakByClipping:NO
                                                                                   interitemSpacing:10
                                                                                       sectionInset:UIEdgeInsetsMake(10, 10, 10, 10)];
-        
-        flowLayout.minimumLineSpacing = 10;
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         
         _collectionView.backgroundColor = [UIColor blackColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.scrollEnabled = YES;
+        _collectionView.scrollEnabled = NO;
         
         [_collectionView registerClass:[ZSFixedSpecingCollectionViewCell class] forCellWithReuseIdentifier:[ZSFixedSpecingCollectionViewCell identifier]];
         
@@ -77,12 +75,12 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
-    return 1;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return 1;
+    return 5;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,7 +95,12 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    return CGSizeMake(400, 20);
+    return CGSizeMake(100, 20);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    
+    return section % 2 == 0 ? 10 : 20;
 }
 
 @end
