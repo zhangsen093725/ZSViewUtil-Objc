@@ -70,14 +70,19 @@
     CGSize imageViewSize = [self imageViewSize];
     CGSize titleLabelSize = [self.titleLabel intrinsicContentSize];
     
+    CGFloat contentWidth = CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.right + self.imageEdgeInsets.left + self.titleEdgeInsets.right + self.titleEdgeInsets.left);
+    CGFloat contentHeight = CGRectGetHeight(self.frame);
+    
+    titleLabelSize = CGSizeMake(MIN(titleLabelSize.width, contentWidth), MIN(contentHeight, titleLabelSize.height));
+    
     CGFloat imageViewX = 0;
     
     switch (self.contentHorizontalAlignment)
     {
         case UIControlContentHorizontalAlignmentCenter:
         {
-            imageViewX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right +
-                                                       titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right)) * 0.5;
+            imageViewX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.right +
+                                                       titleLabelSize.width + self.titleEdgeInsets.left)) * 0.5;
             
             break;
         }
@@ -89,7 +94,7 @@
         }
         case UIControlContentHorizontalAlignmentRight:
         {
-            imageViewX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right +
+            imageViewX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.right +
                                                         titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right));
             
             break;
@@ -111,10 +116,8 @@
     {
         case UIControlContentVerticalAlignmentCenter:
         {
-            imageViewY = (CGRectGetHeight(self.frame) - imageViewSize.height - self.imageEdgeInsets.top - self.imageEdgeInsets.bottom) * 0.5;
-            titleLabelY = (imageViewSize.height - titleLabelSize.height) * 0.5 + (imageViewY +
-                                                                                  self.titleEdgeInsets.top +
-                                                                                  self.titleEdgeInsets.bottom);
+            imageViewY = (CGRectGetHeight(self.frame) - imageViewSize.height) * 0.5 + self.imageEdgeInsets.top - self.imageEdgeInsets.bottom;
+            titleLabelY = (CGRectGetHeight(self.frame) - titleLabelSize.height) * 0.5 + self.titleEdgeInsets.top - self.titleEdgeInsets.bottom;
             
             break;
         }
@@ -155,14 +158,19 @@
     CGSize imageViewSize = [self imageViewSize];
     CGSize titleLabelSize = [self.titleLabel intrinsicContentSize];
     
+    CGFloat contentWidth = CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.right + self.imageEdgeInsets.left + self.titleEdgeInsets.right + self.titleEdgeInsets.left);
+    CGFloat contentHeight = CGRectGetHeight(self.frame);
+    
+    titleLabelSize = CGSizeMake(MIN(titleLabelSize.width, contentWidth), MIN(contentHeight, titleLabelSize.height));
+    
     CGFloat titleLabelX = 0;
     
     switch (self.contentHorizontalAlignment)
     {
         case UIControlContentHorizontalAlignmentCenter:
         {
-            titleLabelX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right +
-                                                       titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right)) * 0.5;
+            titleLabelX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.left +
+                                                       titleLabelSize.width + self.titleEdgeInsets.right)) * 0.5;
             
             break;
         }
@@ -175,7 +183,7 @@
         case UIControlContentHorizontalAlignmentRight:
         {
             titleLabelX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right +
-                                                        titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right));
+                                                        titleLabelSize.width  + self.titleEdgeInsets.right));
             
             break;
         }
@@ -196,10 +204,8 @@
     {
         case UIControlContentVerticalAlignmentCenter:
         {
-            imageViewY = (CGRectGetHeight(self.frame) - imageViewSize.height - self.imageEdgeInsets.top - self.imageEdgeInsets.bottom) * 0.5;
-            titleLabelY = (imageViewSize.height - titleLabelSize.height) * 0.5 + (imageViewY +
-                                                                                  self.titleEdgeInsets.top +
-                                                                                  self.titleEdgeInsets.bottom);
+            imageViewY = (CGRectGetHeight(self.frame) - imageViewSize.height) * 0.5 + self.imageEdgeInsets.top - self.imageEdgeInsets.bottom;
+            titleLabelY = (CGRectGetHeight(self.frame) - titleLabelSize.height) * 0.5 + self.titleEdgeInsets.top - self.titleEdgeInsets.bottom;
             
             break;
         }
@@ -240,6 +246,11 @@
     CGSize imageViewSize = [self imageViewSize];
     CGSize titleLabelSize = [self.titleLabel intrinsicContentSize];
     
+    CGFloat contentWidth = CGRectGetWidth(self.frame);
+    CGFloat contentHeight = CGRectGetHeight(self.frame) - (imageViewSize.height + self.imageEdgeInsets.top + self.imageEdgeInsets.bottom + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom);
+    
+    titleLabelSize = CGSizeMake(MIN(titleLabelSize.width, contentWidth), MIN(contentHeight, titleLabelSize.height));
+    
     CGFloat titleLabelX = 0;
     CGFloat imageViewX = 0;
     
@@ -247,8 +258,8 @@
     {
         case UIControlContentHorizontalAlignmentCenter:
         {
-            imageViewX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right)) * 0.5;
-            titleLabelX = (CGRectGetWidth(self.frame) - (titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right)) * 0.5;
+            imageViewX = (CGRectGetWidth(self.frame) - imageViewSize.width) * 0.5 + self.imageEdgeInsets.left - self.imageEdgeInsets.right;
+            titleLabelX = (CGRectGetWidth(self.frame) - titleLabelSize.width) * 0.5 + self.titleEdgeInsets.left - self.titleEdgeInsets.right;
             
             break;
         }
@@ -261,8 +272,8 @@
         }
         case UIControlContentHorizontalAlignmentRight:
         {
-            imageViewX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right));
-            titleLabelX = (CGRectGetWidth(self.frame) - (titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right));
+            imageViewX = CGRectGetWidth(self.frame) - imageViewSize.width - self.imageEdgeInsets.right;
+            titleLabelX = CGRectGetWidth(self.frame) - titleLabelSize.width - self.titleEdgeInsets.right;
             
             break;
         }
@@ -283,8 +294,8 @@
     {
         case UIControlContentVerticalAlignmentCenter:
         {
-            imageViewY = (CGRectGetHeight(self.frame) - (imageViewSize.height + self.imageEdgeInsets.top + self.imageEdgeInsets.bottom +
-                                                         titleLabelSize.height + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom)) * 0.5;
+            imageViewY = (CGRectGetHeight(self.frame) - (imageViewSize.height + self.imageEdgeInsets.bottom +
+                                                         titleLabelSize.height + self.titleEdgeInsets.top)) * 0.5;
             
             break;
         }
@@ -296,7 +307,7 @@
         }
         case UIControlContentVerticalAlignmentBottom:
         {
-            imageViewY = (CGRectGetHeight(self.frame) - (imageViewSize.height + self.imageEdgeInsets.top + self.imageEdgeInsets.bottom +
+            imageViewY = (CGRectGetHeight(self.frame) - (imageViewSize.height + self.imageEdgeInsets.bottom +
                                                          titleLabelSize.height + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom));
             
             break;
@@ -322,6 +333,11 @@
     CGSize imageViewSize = [self imageViewSize];
     CGSize titleLabelSize = [self.titleLabel intrinsicContentSize];
     
+    CGFloat contentWidth = CGRectGetWidth(self.frame);
+    CGFloat contentHeight = CGRectGetHeight(self.frame) - (imageViewSize.height + self.imageEdgeInsets.top + self.imageEdgeInsets.bottom + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom);
+    
+    titleLabelSize = CGSizeMake(MIN(titleLabelSize.width, contentWidth), MIN(contentHeight, titleLabelSize.height));
+    
     CGFloat titleLabelX = 0;
     CGFloat imageViewX = 0;
     
@@ -329,8 +345,8 @@
     {
         case UIControlContentHorizontalAlignmentCenter:
         {
-            imageViewX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right)) * 0.5;
-            titleLabelX = (CGRectGetWidth(self.frame) - (titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right)) * 0.5;
+            imageViewX = (CGRectGetWidth(self.frame) - imageViewSize.width) * 0.5 + self.imageEdgeInsets.left - self.imageEdgeInsets.right;
+            titleLabelX = (CGRectGetWidth(self.frame) - titleLabelSize.width) * 0.5 + self.titleEdgeInsets.left - self.titleEdgeInsets.right;
             
             break;
         }
@@ -343,8 +359,8 @@
         }
         case UIControlContentHorizontalAlignmentRight:
         {
-            imageViewX = (CGRectGetWidth(self.frame) - (imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right));
-            titleLabelX = (CGRectGetWidth(self.frame) - (titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right));
+            imageViewX = CGRectGetWidth(self.frame) - imageViewSize.width - self.imageEdgeInsets.right;
+            titleLabelX = CGRectGetWidth(self.frame) - titleLabelSize.width - self.titleEdgeInsets.right;
             
             break;
         }
@@ -365,8 +381,8 @@
     {
         case UIControlContentVerticalAlignmentCenter:
         {
-            titleLabelY = (CGRectGetHeight(self.frame) - (imageViewSize.height + self.imageEdgeInsets.top + self.imageEdgeInsets.bottom +
-                                                         titleLabelSize.height + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom)) * 0.5;
+            titleLabelY = (CGRectGetHeight(self.frame) - (imageViewSize.height + self.imageEdgeInsets.top +
+                                                         titleLabelSize.height + self.titleEdgeInsets.bottom)) * 0.5;
             
             break;
         }
@@ -379,7 +395,7 @@
         case UIControlContentVerticalAlignmentBottom:
         {
             titleLabelY = (CGRectGetHeight(self.frame) - (imageViewSize.height + self.imageEdgeInsets.top + self.imageEdgeInsets.bottom +
-                                                         titleLabelSize.height + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom));
+                                                         titleLabelSize.height + self.titleEdgeInsets.bottom));
             
             break;
         }

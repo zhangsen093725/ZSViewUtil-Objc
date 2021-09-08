@@ -90,7 +90,7 @@
             if (self.collectionView.isScrollEnabled == NO)
             {
                 /// 超出可见区域部分不做处理
-                if (CGRectGetMaxY(obj.frame) + self.minimumLineSpacing > CGRectGetHeight(self.collectionView.frame))
+                if (CGRectGetMaxY(obj.frame) + self.sectionInset.bottom > CGRectGetHeight(self.collectionView.frame))
                 {
                     /// 尾行最后一个 Item 不舍弃时，限定最后一个 Item 的宽度为可见区域最大宽度
                     if (self.isLineBreakByClipping == NO)

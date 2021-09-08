@@ -17,7 +17,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     [self.window makeKeyAndVisible];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[ZSViewController new]];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[ZSWaterFlowViewController new]];
     
     return YES;
 }
