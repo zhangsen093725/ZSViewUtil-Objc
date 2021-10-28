@@ -42,24 +42,44 @@
 - (CGSize)intrinsicContentSize {
     
     CGSize imageViewSize = [self.imageView intrinsicContentSize];
+    
+    if (CGSizeEqualToSize(imageViewSize, CGSizeMake(-1, -1)))
+    {
+        imageViewSize = CGSizeZero;
+    }
+    
     CGSize titleLabelSize = [self.titleLabel intrinsicContentSize];
     
-    return CGSizeMake(imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right +
-                      titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right +
-                      self.contentEdgeInsets.left + self.contentEdgeInsets.right,
-                      imageViewSize.height + self.imageEdgeInsets.top + self.imageEdgeInsets.bottom +
-                      titleLabelSize.height + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom +
-                      self.contentEdgeInsets.top + self.contentEdgeInsets.bottom);
+    if (CGSizeEqualToSize(titleLabelSize, CGSizeMake(-1, -1)))
+    {
+        titleLabelSize = CGSizeZero;
+    }
+     
+    CGFloat imageViewWidth = imageViewSize.width + self.imageEdgeInsets.left + self.imageEdgeInsets.right;
+    CGFloat imageViewHeight = imageViewSize.height + self.imageEdgeInsets.top + self.imageEdgeInsets.bottom;
+    
+    CGFloat titleLabeWidth = titleLabelSize.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right;
+    CGFloat titleLabeHeight = titleLabelSize.height + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom;
+    
+    if (_imagePosition == ZSButtonImageLeft || _imagePosition == ZSButtonImageRight)
+    {
+        
+        return CGSizeMake(imageViewWidth + titleLabeWidth + self.contentEdgeInsets.left + self.contentEdgeInsets.right,
+                          MAX(imageViewHeight, titleLabeHeight) + self.contentEdgeInsets.top + self.contentEdgeInsets.bottom);
+    }
+    
+    return CGSizeMake(MAX(imageViewWidth, titleLabeWidth) + self.contentEdgeInsets.left + self.contentEdgeInsets.right,
+                      imageViewHeight + titleLabeHeight + self.contentEdgeInsets.top + self.contentEdgeInsets.bottom);
 }
 
 - (CGSize)imageViewSize {
     
     CGSize imageViewSize = [self.imageView intrinsicContentSize];
-    CGFloat imageViewHeight = MIN(imageViewSize.height, CGRectGetHeight(self.frame));
+    CGFloat imageViewHeight = MIN(imageViewSize.height, CGRectGetHeight(self.frame) - (self.contentEdgeInsets.top + self.contentEdgeInsets.bottom));
     imageViewHeight = imageViewHeight > 0 ? imageViewHeight : 0;
     
     CGFloat imageScale = imageViewSize.height > 0 ? imageViewSize.width / imageViewSize.height : 1;
-    CGFloat imageViewWidth = MIN(imageViewHeight * imageScale, CGRectGetWidth(self.frame));
+    CGFloat imageViewWidth = MIN(imageViewHeight * imageScale, CGRectGetWidth(self.frame) - (self.contentEdgeInsets.left + self.contentEdgeInsets.right));
     imageViewWidth = imageViewWidth > 0 ? imageViewWidth : 0;
     
     return CGSizeMake(imageViewWidth, imageViewHeight);
