@@ -10,6 +10,8 @@
 		0C98129D012D31F0DBACE789F80A2DD0 /* Pods-ZSViewUtil-Objc_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 95CA9CD6FB7EBCFD8D455B0523A3902C /* Pods-ZSViewUtil-Objc_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		135FD47074EB96D4ECD966E797383D06 /* ZSRateCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4C6A5FC9FFA782C64C0D1861F12714 /* ZSRateCollectionViewCell.m */; };
 		3F923D935D1D23D6B64B51545F4A8852 /* ZSWaterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA11666ABE8549597AF3CA75D6150C /* ZSWaterFlowLayout.m */; };
+		4E3FC161280E922B005074F0 /* ZSFocusFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E3FC15F280E922B005074F0 /* ZSFocusFlowLayout.h */; };
+		4E3FC162280E922B005074F0 /* ZSFocusFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FC160280E922B005074F0 /* ZSFocusFlowLayout.m */; };
 		51FF850A76DA6BF5DD23127E0239FD0F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		5520ED82580BEFBC73E544EA6A42D2D0 /* ZSShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5079B9E5926C87D82E8CCBE9923C3D82 /* ZSShadowView.m */; };
 		560FF108971E348E721191803C0A7DB9 /* ZSCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B54F279EE1698977955C0F1BF9DB836 /* ZSCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -70,6 +72,8 @@
 		3F767EBB0CFC609A730A8ABF9FD4906F /* ZSFixedSpecingFlowLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ZSFixedSpecingFlowLayout.m; sourceTree = "<group>"; };
 		41F17B37E6364330A3E100A3EC5A644F /* Pods-ZSViewUtil-Objc_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ZSViewUtil-Objc_Example-dummy.m"; sourceTree = "<group>"; };
 		4C3539F11F327DEC1595E5DADB3E9BAA /* ZSFixedSpecingFlowLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ZSFixedSpecingFlowLayout.h; sourceTree = "<group>"; };
+		4E3FC15F280E922B005074F0 /* ZSFocusFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSFocusFlowLayout.h; sourceTree = "<group>"; };
+		4E3FC160280E922B005074F0 /* ZSFocusFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSFocusFlowLayout.m; sourceTree = "<group>"; };
 		5079B9E5926C87D82E8CCBE9923C3D82 /* ZSShadowView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ZSShadowView.m; sourceTree = "<group>"; };
 		56017B748D2F75CB4CCB49F3FA303C47 /* ZSViewUtil-Objc-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ZSViewUtil-Objc-dummy.m"; sourceTree = "<group>"; };
 		58BB077FAB7584E99D4C133965F51D08 /* Pods-ZSViewUtil-Objc_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZSViewUtil-Objc_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 				395B504EA81EB8AAF5075506E96D4FEC /* ZSPlainFlowLayout.m */,
 				287F674997A5620548D4A29CF2B464C4 /* ZSWaterFlowLayout.h */,
 				05EA11666ABE8549597AF3CA75D6150C /* ZSWaterFlowLayout.m */,
+				4E3FC15F280E922B005074F0 /* ZSFocusFlowLayout.h */,
+				4E3FC160280E922B005074F0 /* ZSFocusFlowLayout.m */,
 			);
 			name = FlowLayout;
 			path = "ZSViewUtil-Objc/Classes/FlowLayout";
@@ -330,6 +336,7 @@
 			files = (
 				5932B819A03825A212541CDCF60DC01F /* ZSButton.h in Headers */,
 				560FF108971E348E721191803C0A7DB9 /* ZSCollectionView.h in Headers */,
+				4E3FC161280E922B005074F0 /* ZSFocusFlowLayout.h in Headers */,
 				BF5DF3EAA4E46327A98F29C8A7C1E58D /* ZSFixedSpecingFlowLayout.h in Headers */,
 				9819768BC58D645DBEF03BFF98111793 /* ZSPlainFlowLayout.h in Headers */,
 				E39899F327470E05F2225D3A36A396B6 /* ZSRateCollectionViewCell.h in Headers */,
@@ -480,6 +487,7 @@
 				135FD47074EB96D4ECD966E797383D06 /* ZSRateCollectionViewCell.m in Sources */,
 				90533ED9D3A2FDC12FAD18FA6090C104 /* ZSRateView.m in Sources */,
 				5520ED82580BEFBC73E544EA6A42D2D0 /* ZSShadowView.m in Sources */,
+				4E3FC162280E922B005074F0 /* ZSFocusFlowLayout.m in Sources */,
 				F5F5F74BD0141F5B8A7E938AB11D9B02 /* ZSViewUtil-Objc-dummy.m in Sources */,
 				3F923D935D1D23D6B64B51545F4A8852 /* ZSWaterFlowLayout.m in Sources */,
 			);
