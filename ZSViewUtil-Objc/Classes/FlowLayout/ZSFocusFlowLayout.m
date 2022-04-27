@@ -157,6 +157,7 @@
 // TODO: Setter
 - (void)setMinimumLineSpacing:(CGFloat)minimumLineSpacing {
     
+    [super setMinimumLineSpacing:0];
     __minimumLineSpacing = minimumLineSpacing;
 }
 
